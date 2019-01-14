@@ -1,0 +1,11 @@
+<html>
+<head>
+    {{Html::style('css/app.css')}}
+</head>
+<body>
+<div>
+    @yield('content')
+</div>
+    {{Html::script('js/app.js')}}
+</body>
+</html>
