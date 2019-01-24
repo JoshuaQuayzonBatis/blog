@@ -1,7 +1,10 @@
 $.noConflict();
 
-$(function(){
-    $("[data-toggle=tooltip]").hover(function(){
+jQuery(function(){
+
+    //tooltip
+    $("[data-toggle='tooltip']").hover(function(){
         $(this).tooltip();
     })
+
 })

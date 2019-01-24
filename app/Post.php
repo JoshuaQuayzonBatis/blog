@@ -5,36 +5,38 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\User;
+use App\Comment;
 class Post extends Model
 {
-    //
+    //@optional
     protected $table="post";
-    protected $fillable=['user_id', 'title', 'content'];
-
-    function user(){
+    protected $fillable=['user_id','title', 'content'];
+    //one post belongs to a user
+    public function user(){
         return $this->belongsTo(User::class);
     }
+    //one posts may have multiple comments
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 
-    function getTitleAttribute($value){
+    function gestTitleAttribute($value){
         //mutate our post title first letter
-        return ucfirst ($value);
+        return ucfirst($value);
     }
 
     function setTitleAttribute($value){
-        //convert our title into something readable
-        //convert title into lower case
+        //convert title to lowercase
         return $this->attributes['title']=strtolower($value);
     }
 
-    function  getCreatedAtAttribute($value){
+    function getCreatedAtAttribute($value){
         $date_now=Carbon::now();
         return $date_now->diffForHumans($value);
-
     }
-    function  getUpdatedAtAttribute($value){
+
+    function getUpdatedAtAttribute($value){
         $date_now=Carbon::now();
         return $date_now->diffForHumans($value);
-
     }
-
 }
